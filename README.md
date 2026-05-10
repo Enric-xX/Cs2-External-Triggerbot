@@ -32,8 +32,9 @@
 
 ---
 
-## 📜 Código Fuente. (v7.2)
+## 📜 Código Fuente (v2)
 
+```autohotkey
 #Requires AutoHotkey v2.0
 #SingleInstance Force
 
@@ -55,8 +56,7 @@ global Sapi    := ComObject("SAPI.SpVoice")
 
 Loop {
     if (Activo && !GetKeyState("LButton", "P")) {
-        ; BUSQUEDA AGRESIVA (Pillamos el Rojo TT que es el más común de detectar)
-        ; Reducimos la variación a 40 para evitar falsos positivos con el mapa
+        ; BUSQUEDA AGRESIVA (Pillamos el Rojo TT)
         if PixelSearch(&Px, &Py, CentroX-Rango, CentroY-Rango, CentroX+Rango, CentroY+Rango, 0xFF0000, 40) {
             Disparar()
         }
@@ -69,10 +69,11 @@ Loop {
 }
 
 Disparar() {
+    ; Envío de señal directa a la API de Windows para mínima latencia
     DllCall("mouse_event", "uint", 0x0002, "int", 0, "int", 0, "uint", 0, "int", 0) ; Left Down
-    Sleep(20) ; Mantener pulsado un instante para que el juego lo registre
+    Sleep(20) 
     DllCall("mouse_event", "uint", 0x0004, "int", 0, "int", 0, "uint", 0, "int", 0) ; Left Up
-    Sleep(150) ; <--- Tiempo de espera entre disparos (más natural que 500ms)
+    Sleep(150) 
 }
 
 F10::ExitApp()
