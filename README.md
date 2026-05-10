@@ -32,7 +32,7 @@
 
 ---
 
-## 📜 Vista previa del Kernel (v2)
+## 📜 Código Fuente. (v7.2)
 
 ```autohotkey
 ; Fragmento del motor de detección optimizado
